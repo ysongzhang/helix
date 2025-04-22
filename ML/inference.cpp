@@ -1,0 +1,103 @@
+#include "NeuralNet/NeuralNetConfig.h"
+#include "NeuralNet/NeuralNetwork.h"
+#include "NeuralNet/secondary.h"
+#include "Protocols/PhaseConfig.h"
+#include "Protocols/MultVerifier.h"
+#include "Protocols/InputVerifier.h"
+#include "Protocols/RevealVerifier.h"
+#include "NeuralNet/globals.h"
+
+using namespace hmmpc;
+using namespace std;
+int partyNum;
+
+// partyNum = argv[1]
+// filename = argv[2] ->nplayers
+// threshold = argv[3]
+// network = argv[4]
+// dataset = argv[5]
+// test_data_size = argv[6]
+// mini_batch = argv[6]
+// trueOffline = argv[7]
+// offline_arg = argv[8]
+// CORES = argv[9]
+// MULT_COMPRESSION = argv[10]
+// VERIFY_PROTOCOL = argv[11]
+int main(int argc, char** argv)
+{
+    int cores = atoi(argv[9]);
+    Eigen::setNbThreads(cores);
+    // cout<<"#threads: "<<Eigen::nbThreads()<<endl;
+
+    // Build Communication Channels
+    partyNum = atoi(argv[1]);
+    int portnum_base = 6000;
+    string filename = argv[2];
+    Names player_name = Names(partyNum, portnum_base, filename);
+    ThreadPlayer P(player_name, "");
+    int threshold = atoi(argv[3]);
+
+    PhaseConfig phase;
+    phase.init(P.num_players(), threshold, &P);
+    MultVerifier::init(atoi(argv[10]), argv[11]);
+
+    // Select Network
+    NeuralNetConfig * config = new NeuralNetConfig(NUM_ITERATIONS);
+    string network, dataset;
+    // network = "SecureML";
+    network = argv[4];
+    dataset = argv[5];
+    loadData(network, dataset, atoi(argv[6]));
+    
+    selectNetwork(network, dataset, config);
+    NeuralNetwork *net = new NeuralNetwork(config);
+    preload_netwok(true, network, net);  // The process of Input is not contained in the timer.
+    // Input Verify
+    InputVerifier::batch_correctness_check_on_shares();
+    
+    if(atoi(argv[7])){// Set true offline.
+        phase.setTrueOffline();
+        phase.start_offline();
+        string offline_arg = argv[8];
+        phase.generate_random(offline_arg);
+        // Note_ZYS: we need to check the correctness with the order: BroadcastCheck -> InputVerifier -> RevealVerifier -> MultVerifier
+        P.Check_Broadcast();
+        InputVerifier::batch_correctness_check_on_shares(true);
+        RevealVerifier::batch_reveal_check();
+        MultVerifier::mult_verify(true);
+        phase.end_offline();
+    }
+
+    phase.start_online();
+    // train(net);
+    test(net);
+    // verify in the online phase
+    P.Check_Broadcast();
+    RevealVerifier::batch_reveal_check();
+    MultVerifier::mult_verify();
+    if(!atoi(argv[7])){
+        phase.switch_to_offline();
+        P.Check_Broadcast();
+        InputVerifier::batch_correctness_check_on_shares(true);
+        RevealVerifier::batch_reveal_check();
+        MultVerifier::mult_verify(true);
+        phase.switch_to_online();
+    }
+    phase.end_online();
+
+    // phase.print_simple();
+
+    if(!atoi(argv[7])){// False offline
+        // The randomness are generated on demand.
+        // It prints the communication costs of each party in the terminal. 
+        phase.print_offline_communication();
+        phase.print_online_communication();
+    }else{  // True offline
+        // The randomness are generated in a seperate pre-processing phase.
+        // The communication size printed here is the average of the communicaiton bytes sent by all parties.
+        phase.print_communication_oneline();
+    }
+
+    
+    
+}

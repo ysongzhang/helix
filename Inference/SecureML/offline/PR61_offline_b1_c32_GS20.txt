@@ -1,0 +1,22 @@
+31856
+51612
+31842
+0 0
+0
+266
+3840
+1024
+256
+0 0
+
+
+#Random = 31856
+#DoubleR = 51612
+#RandomBit = 31842
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 266
+#MultReducedPair = 3840
+#ReMultReducedPair = 1024
+#ReMultReducedPair16 = 256
+#BeaverTriplesNum = 0 0

@@ -1,0 +1,21 @@
+1262116
+2068251
+1262090
+0 0
+0
+10350
+155100
+41360
+10340
+0 0
+
+#Random = 1262116
+#DoubleR = 2068251
+#RandomBit = 1262090
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 10350
+#MultReducedPair = 155100
+#ReMultReducedPair = 41360
+#ReMultReducedPair16 = 10340
+#BeaverTriplesNum = 0 0

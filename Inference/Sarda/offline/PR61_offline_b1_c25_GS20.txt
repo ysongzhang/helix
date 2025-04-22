@@ -1,0 +1,22 @@
+132388
+216369
+132370
+0 0
+0
+1090
+16200
+4320
+1080
+0 0
+
+
+#Random = 132388
+#DoubleR = 216369
+#RandomBit = 132370
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 1090
+#MultReducedPair = 16200
+#ReMultReducedPair = 4320
+#ReMultReducedPair16 = 1080
+#BeaverTriplesNum = 0 0

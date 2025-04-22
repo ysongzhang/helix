@@ -1,0 +1,20 @@
+310000
+1030234
+310000
+0 0
+0
+0
+80000
+50000
+0 0
+
+
+#Random = 310000
+#DoubleR = 1030234
+#RandomBit = 310000
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 0
+#DoubleReducedPair = 80000
+#ReDoubleReducedPair = 50000
+#BeaverTriplesNum = 0 0

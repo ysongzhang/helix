@@ -1,0 +1,31 @@
+8864587
+2512632
+1262090
+0 0
+0
+10350
+155100
+144760
+6 7602496
+1 1996230 1 
+576 25 16 
+64 400 16 
+1 256 100 
+1 100 10 
+1 1768140 1
+
+#Random = 8864587
+#DoubleR = 2512632
+#RandomBit = 1262090
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 10350
+#MultReducedPair = 155100
+#ReMultReducedPair = 144760
+#BeaverTriplesNum = 6 7602496
+#Index 1 = 1 1996230 1 
+#Index 2 = 576 25 16 
+#Index 3 = 64 400 16 
+#Index 4 = 1 256 100 
+#Index 5 = 1 100 10 
+#Index 6 = 1 1768140 1
