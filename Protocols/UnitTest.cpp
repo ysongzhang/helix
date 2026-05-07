@@ -3,6 +3,8 @@
 #include "Protocols/MultVerifier.h"
 #include "Protocols/InputVerifier.h"
 #include "Protocols/RevealVerifier.h"
+#include "Types/sfixMatrix.h"
+
 namespace hmmpc
 {
 // Debug for Share generated with help of PRG.
@@ -714,23 +716,79 @@ void debugGeneral(PhaseConfig *phase)
     
     // phase->end_online();
     
+
+    // phase->start_online();
+    // BeaverBundleTriple trip(3, 5, 4);
+    // trip.beaver_triple();
+    // cout<<endl<<"(General debug)"<<endl;
+    // ShareBundle tmp1(trip.left_shares.rows(), trip.left_shares.cols());
+    // tmp1.set_shares(trip.left_shares);
+    // gfpMatrix left = tmp1.reveal();
+    // cout<<left<<endl<<endl;
+    // ShareBundle tmp2(trip.right_shares.rows(), trip.right_shares.cols());
+    // tmp2.set_shares(trip.right_shares);
+    // gfpMatrix right = tmp2.reveal();
+    // cout<<right<<endl<<endl;
+    // ShareBundle tmp3(trip.prod_shares.rows(), trip.prod_shares.cols());
+    // tmp3.set_shares(trip.prod_shares);
+    // gfpMatrix prod = tmp3.reveal();
+    // cout<<prod<<endl<<endl;
+    // cout<<left * right<<endl<<endl;
+
+
+    // Testing Conv
+    MultVerifier::init();
+    size_t B = 1;
+    size_t iw = 9;
+    size_t ih = 9;
+    size_t Din = 1;
+    size_t P = 2;
+    size_t f = 3;
+    size_t S = 5;
+    size_t Dout = 1;
+    size_t ow 	= (((iw-f+2*P)/S)+1);
+	size_t oh	= (((ih-f+2*P)/S)+1);
+    sfixMatrix input(B,iw*ih*Din);
+    input.secret()<<1,2,3,4,5,6,7,8,9,10,
+    11,12,13,14,15,16,17,18,19,20,
+    21,22,23,24,25,26,27,28,29,30,
+    31,32,33,34,35,36,37,38,39,40,
+    41,42,43,44,45,46,47,48,49,50,
+    51,52,53,54,55,56,57,58,59,60,
+    61,62,63,64,65,66,67,68,69,70,
+    71,72,73,74,75,76,77,78,79,80,
+    81;
+    
+    sfixMatrix weights(Din*f*f, Dout);
+    weights.secret()<<1,1,1,1,1,1,1,1,1;
+    
+    input.distribute_shares();
+    weights.distribute_shares();
+    // cout<<input.reveal().values<<endl;
+    // cout<<weights.reveal().values<<endl;
+
     phase->start_online();
-    BeaverBundleTriple trip(3, 5, 4);
-    trip.beaver_triple();
-    cout<<endl<<"(General debug)"<<endl;
-    ShareBundle tmp1(trip.left_shares.rows(), trip.left_shares.cols());
-    tmp1.set_shares(trip.left_shares);
-    gfpMatrix left = tmp1.reveal();
-    cout<<left<<endl<<endl;
-    ShareBundle tmp2(trip.right_shares.rows(), trip.right_shares.cols());
-    tmp2.set_shares(trip.right_shares);
-    gfpMatrix right = tmp2.reveal();
-    cout<<right<<endl<<endl;
-    ShareBundle tmp3(trip.prod_shares.rows(), trip.prod_shares.cols());
-    tmp3.set_shares(trip.prod_shares);
-    gfpMatrix prod = tmp3.reveal();
-    cout<<prod<<endl<<endl;
-    cout<<left * right<<endl<<endl;
+    gfpMatrix res1(B, (iw+2*P)*(ih+2*P)*Din);
+    res1.setZero();
+    sfixMatrix res2(B*oh*ow, f*f*Din);
+
+    zeroPad(input.share(), res1, iw, ih, P, Din, B);
+    convolExtend(res1, res2.share(), iw, ih, ow, oh, Din, S, f, P, B);
+    sfixMatrix res3(res2.share() * weights.share());
+    res3.reduce_truncate();
+    MultVerifier::push_matrix_triple(res2.share(), weights.share(), res3.checked());
+
+    cout<<endl<<"zero padding"<<endl;
+    cout<<res1<<endl;
+    cout<<endl<<"Extended conv"<<endl;
+    cout<<res2.reveal().values<<endl;
+    cout<<endl<<"Matrix multiplication"<<endl;
+    cout<<res3.reveal().values<<endl;
+
+    MultVerifier::mult_verify(true);
+    MultVerifier::mult_verify();
+    
+    phase->end_online();
 }
 
 }

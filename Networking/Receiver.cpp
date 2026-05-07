@@ -74,6 +74,7 @@ void Receiver::request(octetStream& os)
 }
 
 //TODO 确保收一个，读一个？
+// NOTE_ZYS: for handling multi-threads. Since the real sending is in subThread, thus needs two queues to handle the communication among multi-threads.
 void Receiver::wait(octetStream& os)
 {
     octetStream* queued = 0;

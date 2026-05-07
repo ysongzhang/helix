@@ -366,22 +366,23 @@ void zeroPad(const Eigen::MatrixBase<Derived>&a, Eigen::MatrixBase<Derived>&b,
 }
 
 // Extend a to b for convolution.
-//imageWidth, imageHeight, outputWeight, outpuHeight, inputFilters, stepStride, filterSize, batchSize
+//imageWidth, imageHeight, outputWeight, outpuHeight, inputFilters, stepStride, filterSize, padding, batchSize
 // For image 2*2 with two features, the storage is feature1(2*2) feature2(2*2)
+// Report_ZYS: Add the functionality to handle conv with padding.
 inline void convolExtend(const gfpMatrix &a, gfpMatrix&b,
                 size_t iw, size_t ih, size_t ow, size_t oh,
-                size_t Din, size_t S, size_t f, size_t B)
+                size_t Din, size_t S, size_t f, size_t P, size_t B)
 {
     assert(b.rows() == B*ow*oh);
     assert(b.cols() == f*f*Din);
     for(size_t i = 0; i < B; i++){
         // auto img = reshape_helper(a.row(i), ih, iw*Din);
-        const gfpMatrix &img = a.row(i).reshaped<RowMajor>(ih*Din, iw);
+        const gfpMatrix &img = a.row(i).reshaped<RowMajor>((ih+2*P)*Din, (iw+2*P));
         for(size_t j = 0; j < oh; j++)
             for(size_t k = 0; k < ow; k++){
                 // for each feature
                 for(size_t w = 0; w < Din; w++){
-                    b.row(i*ow*oh + j*ow + k).segment(w*f*f, f*f) = img.block(w*ih+j*S, k*S, f, f).reshaped<RowMajor>(1, f*f);
+                    b.row(i*ow*oh + j*ow + k).segment(w*f*f, f*f) = img.block(w*(ih+2*P)+j*S, k*S, f, f).reshaped<RowMajor>(1, f*f);
                 }
             }
     }

@@ -9,11 +9,12 @@ namespace hmmpc
 
 void train(NeuralNetwork *net);
 void test(NeuralNetwork *net);
+void testAcc(NeuralNetwork *net, string network);
 
 void train(NeuralNetworkClear *net);
 void test(NeuralNetworkClear *net);
 
-void preload_netwok(bool PRELOADING, string network, NeuralNetwork *net);
+void preload_netwok(bool PRELOADING, string network, string dataset, NeuralNetwork *net);
 void loadData(string net, string dataset, size_t test_data_size);
 void loadPlainData(string net, string dataset);
 void readMiniBatch(NeuralNetwork* net, string phase);

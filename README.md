@@ -121,9 +121,9 @@ Let me show the details of how to conduct the experiment for `7pc` with 7 separa
 
       - `PR61`: Mersenne prime $2^{61}-1$.
 
-   - `NETWORK=SecureML`: Only support SecureML, Sarda and MiniONN now.
+   - `NETWORK=SecureML`: Only support SecureML, Sarda, MiniONN, LeNet, AlexNet and VGG16 now.
 
-   - `DATASET=MNIST`: We only support MNIST dataset right now.
+   - `DATASET=MNIST`: We support MNIST, CIFAR-10 and ImageNet datasets right now.
 
    - `NET=WAN`: Conduct the experiment in the WAN setting.
 
@@ -138,8 +138,8 @@ Let me show the details of how to conduct the experiment for `7pc` with 7 separa
    - `OFFLINE_ARG=`: The location of the file, which specifies the number of various random sharings required to be generated in the preprocessing phase.  We precompute it for some settings, stored in the following location.
 
      ```bash
-     OFFLINE_ARG=Inference/$NETWORK/offline/${PRIME}_offline_b${TEST_DATA_SIZE}_c${MULT_COMPRESSION}_${VERIFY_PROTOCOL}.txt
-     # In this example, the default location is Inference/SecureML/offline/PR61_offline_b1_c32_GS20.txt
+     OFFLINE_ARG=Inference/$NETWORK/offline/${PRIME}_offline_${DATASET}_b${TEST_DATA_SIZE}_c${MULT_COMPRESSION}_${VERIFY_PROTOCOL}.txt
+     # In this example, the default location is Inference/SecureML/offline/PR61_offline_MNIST_b1_c32_GS20.txt
      ```
 
    - `Output_file=` : The location of the output file. In order to ensure reliable results, a single execution contains 10 independent runs. For simplicity, we only collect the output of P0's. The default location is set to 

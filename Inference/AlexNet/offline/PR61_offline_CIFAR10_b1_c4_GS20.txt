@@ -1,0 +1,22 @@
+2495310
+5088147
+2495266
+0 0
+0
+15466
+381600
+101760
+25440
+0 0
+
+
+#Random = 2495310
+#DoubleR = 5088147
+#RandomBit = 2495266
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 15466
+#MultReducedPair = 381600
+#ReMultReducedPair = 101760
+#ReMultReducedPair16 = 25440
+#BeaverTriplesNum = 0 0

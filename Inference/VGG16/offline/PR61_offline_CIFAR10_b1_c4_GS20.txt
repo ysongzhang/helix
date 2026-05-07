@@ -1,0 +1,19 @@
+34730594
+56934400
+34730594
+0 0
+0
+284682
+4270080
+1138688
+284672
+
+#Random = 34730594
+#DoubleR = 56934400
+#RandomBit = 34730594
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 284682
+#MultReducedPair = 4270080
+#ReMultReducedPair = 1138688
+#ReMultReducedPair16 = 284672

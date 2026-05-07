@@ -60,10 +60,11 @@ void CNNLayer::forward(const sfixMatrix &inputActivations)
 	size_t oh	= (((ih-f+2*P)/S)+1);
 
     gfpMatrix paddedInput(B, (iw+2*P)*(ih+2*P)*Din);
+	paddedInput.setZero(); // NOTE_ZYS: Report BUG - The Eigen library does not always initialize matrices to zero here; sometimes they are allocated with random values. 
     zeroPad(inputActivations.share(), paddedInput, iw, ih, P, Din, B);
 
     sfixMatrix extendInput(B*oh*ow, f*f*Din);
-    convolExtend(paddedInput, extendInput.share(), iw, ih, ow, oh, Din, S, f, B);
+    convolExtend(paddedInput, extendInput.share(), iw, ih, ow, oh, Din, S, f, P, B);
 
 	// activations(B, oh*ow*Dout)
     if (FUNCTION_TIME)

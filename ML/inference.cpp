@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     
     selectNetwork(network, dataset, config);
     NeuralNetwork *net = new NeuralNetwork(config);
-    preload_netwok(true, network, net);  // The process of Input is not contained in the timer.
+    preload_netwok(true, network, dataset, net);  // The process of Input is not contained in the timer.
     // Input Verify
     InputVerifier::batch_correctness_check_on_shares();
     
@@ -71,6 +71,7 @@ int main(int argc, char** argv)
     phase.start_online();
     // train(net);
     test(net);
+    // testAcc(net, network);
     // verify in the online phase
     P.Check_Broadcast();
     RevealVerifier::batch_reveal_check();
@@ -97,7 +98,5 @@ int main(int argc, char** argv)
         // The communication size printed here is the average of the communicaiton bytes sent by all parties.
         phase.print_communication_oneline();
     }
-
-    
     
 }

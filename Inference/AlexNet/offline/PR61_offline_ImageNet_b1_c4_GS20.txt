@@ -1,0 +1,20 @@
+58416040
+70656000
+58416040
+0 0
+0
+604360
+5299200
+1413120
+353280
+
+
+#Random = 58416040
+#DoubleR = 70656000
+#RandomBit = 58416040
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 604360
+#MultReducedPair = 5299200
+#ReMultReducedPair = 1413120
+#ReMultReducedPair16 = 353280

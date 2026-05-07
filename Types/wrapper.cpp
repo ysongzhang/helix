@@ -155,6 +155,6 @@ void funcOnlyMaxpool(const sfixMatrix &input, sfixMatrix &activations,
     sfixMatrix tmpActivations(B*ow*oh*Din, 1);
     // input.Maxpool(tmpActivations);
     input.Maxpool_opt(tmpActivations);
-    activations.share() = tmpActivations.share().reshaped(B, ow*oh*Din);
+    activations.share() = tmpActivations.share().reshaped<RowMajor>(B, ow*oh*Din);
 }
 }

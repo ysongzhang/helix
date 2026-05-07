@@ -1,0 +1,11 @@
+
+.VSCodeCounter/**
+.vscode/**
+
+*.d
+*.o
+*.a
+*.x
+*.P0
+
+.ipynb_checkpoints

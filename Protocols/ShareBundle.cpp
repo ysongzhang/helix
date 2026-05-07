@@ -117,7 +117,7 @@ void ShareBundle::send_shares_all()
 {
     octetStream o;
     pack_matrix(shares, o);
-    P->send_all(o);  // TODO_ZYS: 根据作者的DEBUG日志，似乎不能直接使用send_all函数，而是需要拆开request和wait来，后续如果通信出问题可以参考ShareBundle::reveal_dispersed()函数中的模式进行修改
+    P->send_all(o);
 }
 
 void ShareBundle::receive_shares_all(octetStreams& os)

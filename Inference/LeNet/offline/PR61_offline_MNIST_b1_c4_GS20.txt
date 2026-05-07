@@ -1,0 +1,21 @@
+1857494
+3044148
+1857450
+0 0
+0
+15230
+228300
+60880
+15220
+0 0
+
+#Random = 1857494
+#DoubleR = 3044148
+#RandomBit = 1857450
+#RandomUn = 0 0
+#RandomTrunc = 0
+#RandomReTrunc = 15230
+#MultReducedPair = 228300
+#ReMultReducedPair = 60880
+#ReMultReducedPair16 = 15220
+#BeaverTriplesNum = 0 0
