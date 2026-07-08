@@ -39,7 +39,7 @@ void InputVerifier::push_matrix(gfpMatrix share_matrix, bool is_offline)
     }
 }
 
-// TODO_ZYS: May be adding the mutex lock when clear the shares vector
+// TODO: May be adding the mutex lock when clear the shares vector
 void InputVerifier::batch_correctness_check_on_shares(bool is_offline)
 {
     if(is_offline){

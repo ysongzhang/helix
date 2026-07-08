@@ -208,7 +208,7 @@ void preload_netwok(bool PRELOADING, string network, string dataset, NeuralNetwo
         string path_weight2 = default_path+"weight2";
         string path_weight3 = default_path+"weight3";
         // Note: The weights of CNN layer stored in the file is slightly strange...(Pay attention)
-        // Note_ZYS: The weights of CNN layer are stored sequentially. In this case, they are read row by row, with every four values forming a filter.
+        // Note: The weights of CNN layer are stored sequentially. In this case, they are read row by row, with every four values forming a filter.
         (((CNNLayer*)net->layers[0])->getWeights()).input_secrets_from_ColMajor(path_weight1, 0, 2*2*1);//row=4, col=5
         (((FCLayer*)net->layers[2])->getWeights()).input_secrets_from_ColMajor(path_weight2, 0, 980);//row=100, col=100
         (((FCLayer*)net->layers[4])->getWeights()).input_secrets_from_ColMajor(path_weight3, 0, 100);//row=100, col=10

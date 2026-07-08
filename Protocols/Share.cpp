@@ -868,7 +868,7 @@ void Share::reveal_to_pking()
 // Reveal to Pking, then send the secret to other parties.
 gfpScalar Share::reveal(bool active)
 {
-    if(active && (degree == threshold)){  // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    if(active && (degree == threshold)){  // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
         compare_view();
     }
     reveal_to_pking();
@@ -881,7 +881,7 @@ gfpScalar Share::reveal(bool active)
         secret.unpack(o);
     }
 
-    // TODO_ZYS: the view of secret need to be compared.
+    // TODO: the view of secret need to be compared.
     if(active) {
         P->update_hash_state(o.get_data(), o.get_length());
     }
@@ -897,7 +897,7 @@ gfpScalar Share::reveal(bool active)
 void Share::reveal_to_party_with_check(int player_no) 
 {
     assert(degree == threshold);
-    compare_view(); // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    compare_view(); // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
 
     if(P->my_num()!=player_no){
         send_share(player_no);
@@ -929,7 +929,7 @@ void Share::reveal_to_party_with_check(int player_no)
 gfpScalar Share::reveal_with_check()
 {
     assert(degree == threshold);
-    compare_view(); // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    compare_view(); // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
 
     // for(size_t player_no = 0; player_no < n_players; player_no++){
     //     if(P->my_num()!=player_no){

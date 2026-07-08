@@ -368,7 +368,7 @@ void zeroPad(const Eigen::MatrixBase<Derived>&a, Eigen::MatrixBase<Derived>&b,
 // Extend a to b for convolution.
 //imageWidth, imageHeight, outputWeight, outpuHeight, inputFilters, stepStride, filterSize, padding, batchSize
 // For image 2*2 with two features, the storage is feature1(2*2) feature2(2*2)
-// Report_ZYS: Add the functionality to handle conv with padding.
+// Report_: Add the functionality to handle conv with padding.
 inline void convolExtend(const gfpMatrix &a, gfpMatrix&b,
                 size_t iw, size_t ih, size_t ow, size_t oh,
                 size_t Din, size_t S, size_t f, size_t P, size_t B)

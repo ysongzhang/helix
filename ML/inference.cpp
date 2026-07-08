@@ -60,7 +60,7 @@ int main(int argc, char** argv)
         phase.start_offline();
         string offline_arg = argv[8];
         phase.generate_random(offline_arg);
-        // Note_ZYS: we need to check the correctness with the order: BroadcastCheck -> InputVerifier -> RevealVerifier -> MultVerifier
+        // Note: we need to check the correctness with the order: BroadcastCheck -> InputVerifier -> RevealVerifier -> MultVerifier
         P.Check_Broadcast();
         InputVerifier::batch_correctness_check_on_shares(true);
         RevealVerifier::batch_reveal_check();

@@ -104,7 +104,7 @@ void funcConvMatMul(const sfixMatrix &a, const sfixMatrix &b, const sfixMatrix &
     // b: (f*f*Din, Dout)
 
     // tmp = B*ow*oh, Dout
-    // REPORT_ZYS: Could be replaced by tmp_res = a * b;
+    // REPORT_: Could be replaced by tmp_res = a * b;
     sfixMatrix tmp_res(a.share() * b.share());
     tmp_res.reduce_truncate();
 
@@ -120,7 +120,7 @@ void funcConvMatMul(const sfixMatrix &a, const sfixMatrix &b, const sfixMatrix &
     } else {
     }
     
-    gfpMatrix tmp = tmp_res.share().array() + gfpMatrix(biases.share().colwise().replicate(a.rows())).array();  // REPORT_ZYS: BUG? Need to truncate first and then add the bias.
+    gfpMatrix tmp = tmp_res.share().array() + gfpMatrix(biases.share().colwise().replicate(a.rows())).array();  // REPORT_: BUG? Need to truncate first and then add the bias.
     // res = B, ow*oh*Dout
     size_t nRow=ow*oh;
     for(size_t i = 0; i < B; i++){

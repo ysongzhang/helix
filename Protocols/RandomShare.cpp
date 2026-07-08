@@ -91,7 +91,7 @@ void RandomShare::generate_random_sharings_active(size_t num)
     generate_passive_random_sharings(passive_random_sharings);
 
     // Correctness check
-    gfpMatrix active_open_randoms(num, 1);  // TODO_ZYS: seed+PRF
+    gfpMatrix active_open_randoms(num, 1);  // TODO: seed+PRF
     generate_active_open_randoms(active_open_randoms);
     gfpMatrix coefficients(num+1, 1);
     // coefficients.block(0, 0, num, 1) = active_open_randoms;
@@ -362,7 +362,7 @@ void RandomShare::generate_active_open_randoms_PRG(gfpMatrix &res)
 void RandomShare::generate_active_open_randoms_online_offline(gfpMatrix &res)
 {
     ShareBundle random_data(res.rows(), res.cols());
-    random_data.random();  // Note_ZYS: execute in the offline phase which could provide active security. But passive security is OK.
+    random_data.random();  // Note: execute in the offline phase which could provide active security. But passive security is OK.
     res = random_data.reveal_with_check();  // O(n^2)
 }
 
@@ -950,7 +950,7 @@ void DoubleRandom::generate_non_zero_random_row_wise(gfpMatrix &res, gfpMatrix &
 // The following is unbounded multiplication in parallel, which is more practical.
 void DoubleRandom::generate_unbounded_random_sharings(size_t num)
 {
-    // TODO_ZYS: R can not be zero since we want to compute the inversion.
+    // TODO: R can not be zero since we want to compute the inversion.
     gfpMatrix rand_b(num, 2);
     gfpMatrix prod_reveal(num, 1);
     generate_non_zero_random_column_wise(rand_b, prod_reveal);
@@ -983,7 +983,7 @@ void DoubleRandom::generate_unbounded_random_sharings(size_t num)
 
 void DoubleRandom::generate_unbounded_random_sharings_active(size_t num)
 {
-    // TODO_ZYS: R can not be zero since we want to compute the inversion.
+    // TODO: R can not be zero since we want to compute the inversion.
     gfpMatrix rand_b(num, 2);
     gfpMatrix prod_reveal(num, 1);
     generate_non_zero_random_column_wise(rand_b, prod_reveal, true);

@@ -196,14 +196,14 @@ public:
     ShareBundle unbounded_postfix_mult();
     ShareBundle evalFunc(string fn, size_t degree);// Evaluate the function result of each entry given input X and degree.
 
-    /// ZYS's Operations: for prefix and unbounded computations
+    /// 's Operations: for prefix and unbounded computations
     // Three layer multiplication: compute share(i.e., x) * y * z * w
     ShareBundle three_layers_DN(const ShareBundle &y, const ShareBundle &z, const ShareBundle &w);
     // Reused three layer-mult: compute ([xyz1w1], [xyz2w2], ...) from input [x], [y] and ([z1], [z2], ...), ([w1], [w2], ...).
     // Note that the size of vector is at most 4.
     vector<ShareBundle> three_layers_DN(const ShareBundle &y, const vector<ShareBundle> &z, const vector<ShareBundle> &w);
 
-    // ZYS's optimized protocols which are able to handle the zero numbers.
+    // 's optimized protocols which are able to handle the zero numbers.
     ShareBundle unbounded_mult_4Elems();
     ShareBundle unbounded_mult_4Elems_reused(); // Reuse the first 3 elements and at most compute 4 unbounded mult for each row. That is for each row ([a], [b], [c], [d1], [d2], [d3], [d4]), Returns ([abcd1], [abcd2], [abcd3], [abcd4])
     ShareBundle unbounded_mult_3Elems();
@@ -214,7 +214,7 @@ public:
     ShareBundle unbounded_postfix_mult_3Elems();
     ShareBundle unbounded_mult_mixed_reused(size_t two_elem_rows, size_t three_elem_rows, size_t four_elem_rows);
     ShareBundle unbounded_mult_mixed_reused_16(size_t two_elem_rows, size_t three_elem_rows, size_t four_elem_rows);
-    ShareBundle unbounded_mult_log4_round(); // TODO_ZYS: Next version.
+    ShareBundle unbounded_mult_log4_round(); // TODO: Next version.
     ShareBundle prefix_mult_log4_round();
     ShareBundle postfix_mult_log4_round();
 

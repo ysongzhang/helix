@@ -434,7 +434,7 @@ ShareBundle& ShareBundle::reduce_degree()
     // degree >>= 1;
     // input_blocks_dispersed_PRG();  // obtain the t-sharing shares
 
-    // TODO_ZYS: Input correctness check?
+    // TODO: Input correctness check?
 
     // shares = shares - R.shares;
     return *this;
@@ -1059,7 +1059,7 @@ gfpMatrix ShareBundle::reveal(bool active)
     // Dispersed version.
     return reveal_dispersed(active);
 #else
-    if(active && (degree == threshold)){  // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    if(active && (degree == threshold)){  // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
         compare_view();
     }
 
@@ -1072,7 +1072,7 @@ gfpMatrix ShareBundle::reveal(bool active)
         receive_secrets(Pking, o);
     }
 
-    // TODO_ZYS: the view of secrets need to be compared.
+    // TODO: the view of secrets need to be compared.
     if(active) {
         P->update_hash_state(o.get_data(), o.get_length());
     }
@@ -1089,7 +1089,7 @@ gfpMatrix ShareBundle::reveal(bool active)
 void ShareBundle::reveal_to_party_with_check(int player_no)
 {
     assert(degree == threshold);
-    compare_view(); // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    compare_view(); // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
     if(P->my_num()!=player_no){
         send_shares(player_no);
     }
@@ -1119,7 +1119,7 @@ void ShareBundle::reveal_to_party_with_check(int player_no)
 gfpMatrix ShareBundle::reveal_with_check()
 {
     assert(degree == threshold);
-    compare_view(); // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    compare_view(); // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
     // for(size_t player_no = 0; player_no < n_players; player_no++){
     //     if(P->my_num()!=player_no){
     //         send_shares(player_no);
@@ -1168,7 +1168,7 @@ gfpMatrix ShareBundle::reveal_truncate(size_t precision, bool active)
     // Dispersed version.
     return reveal_truncate_dispersed(precision, active);
 #else
-    if(active && (degree == threshold)){  // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    if(active && (degree == threshold)){  // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
         compare_view();
     }
 
@@ -1181,7 +1181,7 @@ gfpMatrix ShareBundle::reveal_truncate(size_t precision, bool active)
         receive_secrets(Pking, o);
     }
 
-    // TODO_ZYS: the view of secrets need to be compared.
+    // TODO: the view of secrets need to be compared.
     if(active) {
         P->update_hash_state(o.get_data(), o.get_length());
     }
@@ -1203,7 +1203,7 @@ gfpMatrix ShareBundle::reveal_truncate(vector<size_t> &precision, bool active)
     // Dispersed version.
     return reveal_truncate_dispersed(precision, active);
 #else
-    if(active && (degree == threshold)){  // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    if(active && (degree == threshold)){  // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
         compare_view();
     }
 
@@ -1216,7 +1216,7 @@ gfpMatrix ShareBundle::reveal_truncate(vector<size_t> &precision, bool active)
         receive_secrets(Pking, o);
     }
 
-    // TODO_ZYS: the view of secrets need to be compared.
+    // TODO: the view of secrets need to be compared.
     if(active) {
         P->update_hash_state(o.get_data(), o.get_length());
     }
@@ -1236,7 +1236,7 @@ gfpMatrix ShareBundle::reveal_truncate(vector<size_t> &precision, bool active)
 // We disperse the Pking role to every party.
 gfpMatrix ShareBundle::reveal_dispersed(bool active)
 {
-    if(active && (degree == threshold)){  // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    if(active && (degree == threshold)){  // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
         compare_view();
     }
 
@@ -1257,7 +1257,7 @@ gfpMatrix ShareBundle::reveal_dispersed(bool active)
     P->wait_receive_respective(os_recev);
     unpack_rows(secrets, os_recev);
 
-    // TODO_ZYS: the view of secrets need to be compared.
+    // TODO: the view of secrets need to be compared.
     if(active) {
         os_recev[P->my_num()] = os_send;
         for(int i = 0; i < n_players; i++){
@@ -1281,7 +1281,7 @@ gfpMatrix ShareBundle::reveal_dispersed(bool active)
 // Compared to the above functionality, it truncates the secrets before sending to other paties.
 gfpMatrix ShareBundle::reveal_truncate_dispersed(size_t precision, bool active)
 {
-    if(active && (degree == threshold)){  // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    if(active && (degree == threshold)){  // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
         compare_view();
     }
 
@@ -1301,7 +1301,7 @@ gfpMatrix ShareBundle::reveal_truncate_dispersed(size_t precision, bool active)
     P->wait_receive_respective(os_recev);
     unpack_rows(secrets, os_recev);
 
-    // TODO_ZYS: the view of secrets need to be compared.
+    // TODO: the view of secrets need to be compared.
     if(active) {
         os_recev[P->my_num()] = os_send;
         for(int i = 0; i < n_players; i++){
@@ -1321,7 +1321,7 @@ gfpMatrix ShareBundle::reveal_truncate_dispersed(size_t precision, bool active)
 
 gfpMatrix ShareBundle::reveal_truncate_dispersed(vector<size_t> &precision, bool active)
 {
-    if(active && (degree == threshold)){  // Note_ZYS: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
+    if(active && (degree == threshold)){  // Note: When reveal t-sharings, must compare view first. Because the adversary may conduct differential attack.
         compare_view();
     }
 
@@ -1341,7 +1341,7 @@ gfpMatrix ShareBundle::reveal_truncate_dispersed(vector<size_t> &precision, bool
     P->wait_receive_respective(os_recev);
     unpack_rows(secrets, os_recev);
 
-    // TODO_ZYS: the view of secrets need to be compared.
+    // TODO: the view of secrets need to be compared.
     if(active) {
         os_recev[P->my_num()] = os_send;
         for(int i = 0; i < n_players; i++){
@@ -1581,9 +1581,9 @@ ShareBundle ShareBundle::unbounded_prefix_mult()
     R.unbounded_prefix_mult_random();
 
     ShareBundle res(rows(), cols());
-    res.shares = shares.array() * R.aux_shares.array();  // Note_ZYS: shares can not be zero.
+    res.shares = shares.array() * R.aux_shares.array();  // Note: shares can not be zero.
 
-    // TODO_ZYS: Use PRZS
+    // TODO: Use PRZS
     // res.reduce_degree();
     
     // Here the PRZS is ommitted for simplicity. But it dosen't matter to the online phase.

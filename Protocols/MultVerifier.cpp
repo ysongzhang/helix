@@ -28,7 +28,7 @@ int MultVerifier::before_triples_num_offline = 0;
 gfpVector MultVerifier::recurive_left;
 gfpVector MultVerifier::recurive_right;
 gfpScalar MultVerifier::recurive_product(0);
-int MultVerifier::k; // NOTE_ZYS: k must be larger than 1.
+int MultVerifier::k; // Note: k must be larger than 1.
 gfpMatrix MultVerifier::reconstruction_matrix;
 string MultVerifier::verify_protocol = "";
 bool MultVerifier::offline_flag = false;
@@ -206,7 +206,7 @@ void MultVerifier::mult_verify(bool is_offline)
     }
 }
 
-// TODO_ZYS: May be adding the mutex lock when clear the vectors and recurive matrix
+// TODO: May be adding the mutex lock when clear the vectors and recurive matrix
 void MultVerifier::mult_verify_GS20()
 {
     if(offline_flag) {
@@ -520,7 +520,7 @@ gfpMatrix MultVerifier::extend_compress(gfpMatrix input, int flag, gfpScalar &re
     gfpMatrix tmp_r(2, 1);
     coin(tmp_r);
     gfpScalar r = tmp_r(0, 0);
-    // assert(r > k-1); // Note_ZYS: The output of extend_compress is not opened. Thus, there is no need to abort when r <= k-1.
+    // assert(r > k-1); // Note: The output of extend_compress is not opened. Thus, there is no need to abort when r <= k-1.
 
     // point == r
     gfpVector reconstructFAndG = ShareBase::get_reconstruction_vector_general(r, k-1, ShareBase::reuse_factor_extend_compress);
@@ -677,8 +677,8 @@ void MultVerifier::mult_verify_Falcon()
         if(triples_num_offline < 1) {
             return;
         } else{
-            // Note_ZYS: Since the preprocessing phase of Falcon must provide the correct Beaver triples, we must use the GS20/LN17 protocol to verify the offline process.
-            // Note_ZYS: Now use the GS20 protocol
+            // Note: Since the preprocessing phase of Falcon must provide the correct Beaver triples, we must use the GS20/LN17 protocol to verify the offline process.
+            // Note: Now use the GS20 protocol
             mult_verify_step_one();
             mult_verify_step_two();
             mult_verify_step_three();

@@ -32,7 +32,7 @@ void RevealVerifier::push_matrix(gfpMatrix openValues, gfpMatrix shareValues)
     reveal_num += openValues.size();
 }
 
-// TODO_ZYS: May be adding the mutex lock when clear the opened and shared vectors
+// TODO: May be adding the mutex lock when clear the opened and shared vectors
 void RevealVerifier::batch_reveal_check()
 {
     if (reveal_num <= 0) {

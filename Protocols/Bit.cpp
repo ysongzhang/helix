@@ -168,7 +168,7 @@ BitBundle less_than_unsigned(const BitBundle &a, const BitBundle &b)
 
     // Postfix-OR of xorRes
     BitBundle postfixOr(xorRes.rows(), xorRes.cols());
-    // postfixOr.shares = xorRes.postfix_op_one_round("OR").shares;  // TODO_ZYS: not safe postfix_op_one_round
+    // postfixOr.shares = xorRes.postfix_op_one_round("OR").shares;  // TODO: not safe postfix_op_one_round
     postfixOr.shares = xorRes.postfix_op_opt("OR").shares;
 
     size_t len = xorRes.cols();
@@ -409,7 +409,7 @@ BitBundle BitBundle::postfix_op(string fn, size_t blk_size)
     // !Depricated
 }
 
-// TODO_ZYS: The protocols are not safe since inputs are bits. 
+// TODO: The protocols are not safe since inputs are bits. 
 BitBundle BitBundle::prefix_op_one_round(string fn)
 {
     BitBundle res(rows(), cols());
@@ -425,7 +425,7 @@ BitBundle BitBundle::prefix_op_one_round(string fn)
         return res;
     }
 }
-// TODO_ZYS: The protocols are not safe since inputs are bits. 
+// TODO: The protocols are not safe since inputs are bits. 
 BitBundle BitBundle::postfix_op_one_round(string fn)
 {
     BitBundle res(rows(), cols());

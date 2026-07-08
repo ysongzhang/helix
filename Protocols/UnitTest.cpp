@@ -668,7 +668,7 @@ void benchReLU(PhaseConfig *phase, int num, int true_offline)
     ShareBase::P->Check_Broadcast();
     MultVerifier::mult_verify();
     RevealVerifier::batch_reveal_check();
-    // TODO_ZYS: When using False offline mode, the communication and running time is slightly large for the online phase. This is because some verification procedure of offline is executed in the online phase.
+    // TODO: When using False offline mode, the communication and running time is slightly large for the online phase. This is because some verification procedure of offline is executed in the online phase.
     if(!true_offline){
         phase->switch_to_offline();
         InputVerifier::batch_correctness_check_on_shares(true);
